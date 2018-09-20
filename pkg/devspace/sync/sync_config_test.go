@@ -101,7 +101,7 @@ func TestInitialSync(t *testing.T) {
 	}
 
 	//This seems to hang in travis
-	checkFilesAndFolders(t, filesToCheck, foldersToCheck, local, remote, 10*time.Second)
+	checkFilesAndFolders(t, filesToCheck, foldersToCheck, local, remote, 20*time.Second)
 }
 
 func TestNormalSync(t *testing.T) {
@@ -157,21 +157,21 @@ func TestNormalSync(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	checkFilesAndFolders(t, filesToCheck, foldersToCheck, local, remote, 10*time.Second)
+	checkFilesAndFolders(t, filesToCheck, foldersToCheck, local, remote, 20*time.Second)
 
 	filesToCheck, foldersToCheck, err = removeSomeTestFilesAndFolders(local, remote, filesToCheck, foldersToCheck, "_Remove")
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	checkFilesAndFolders(t, filesToCheck, foldersToCheck, local, remote, 10*time.Second)
+	checkFilesAndFolders(t, filesToCheck, foldersToCheck, local, remote, 20*time.Second)
 
 	filesToCheck, foldersToCheck, err = renameSomeTestFilesAndFolders(local, remote, outside, filesToCheck, foldersToCheck)
 	if err != nil {
 		t.Error(err)
 		return
 	}
-	checkFilesAndFolders(t, filesToCheck, foldersToCheck, local, remote, 10*time.Second)
+	checkFilesAndFolders(t, filesToCheck, foldersToCheck, local, remote, 20*time.Second)
 
 }
 
@@ -187,7 +187,7 @@ func setExcludePaths(syncClient *SyncConfig, testCases testCaseList) {
 		/*
 			All paths that should be in these ExcludePaths are marked like this with these strings.
 			for Example: ignoreFileLocal
-			The RenameTo... parts of some files contain those, too, but those use Big Letters so they are not excluded.
+			The RenameTo... parts of some files contain those as well, but those have Big Letters and therefore are not excluded.
 			For example: testFileLocal_RenameToIgnore
 		*/
 		if strings.Contains(testCase.path, "ignore") {
